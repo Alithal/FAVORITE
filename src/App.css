@@ -52,6 +52,22 @@ body {
   border-color: #007bff;
 }
 
+.sort-select {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 180px;
+  font-size: 14px;
+  outline: none;
+  background: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sort-select:hover {
+  border-color: #007bff;
+}
+
 .Cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
