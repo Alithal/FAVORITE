@@ -13,6 +13,7 @@ function App() {
 
   const [isDeleteModal, setIsDeleteModal] = useState(false);
   const [isEditModal, setIsEditModal] = useState(false);
+  const [isViewModal, setIsViewModal] = useState(false); 
   const [currentCard, setCurrentCard] = useState(null);
   const [tempCard, setTempCard] = useState({ title: "", description: "", image: "", tag: "", price: "" });
 
@@ -70,6 +71,16 @@ function App() {
     setIsEditModal(false);
   };
 
+  const openView = (card) => {
+    setCurrentCard(card);
+    setIsViewModal(true);
+  };
+
+  const closeView = () => {
+    setCurrentCard(null);
+    setIsViewModal(false);
+  };
+
   const totalPrice = favorites.reduce((sum, fav) => sum + (parseFloat(fav.price.replace(/[^0-9.-]+/g, "")) || 0), 0);
 
   return (
@@ -107,6 +118,7 @@ function App() {
               </button>
               <button onClick={() => openEdit(card)}>Edit</button>
               <button onClick={() => openDelete(card)}>Delete</button>
+              <button onClick={() => openView(card)}>View</button> 
             </div>
           </div>
         ))}
@@ -114,12 +126,14 @@ function App() {
 
       <h2>Total Favorites Price: {totalPrice}$</h2>
 
+    
       <Modal isOpen={isDeleteModal} onClose={() => setIsDeleteModal(false)}>
         <h2>Delete "{currentCard?.title}"?</h2>
         <button onClick={deleteCard}>Yes</button>
         <button onClick={() => setIsDeleteModal(false)}>No</button>
       </Modal>
 
+     
       <Modal isOpen={isEditModal} onClose={() => setIsEditModal(false)}>
         <h2>{currentCard ? "Edit Card" : "Add Card"}</h2>
         <input placeholder="Title" value={tempCard.title} onChange={(e) => setTempCard({ ...tempCard, title: e.target.value })} />
@@ -128,6 +142,25 @@ function App() {
         <input placeholder="Tag" value={tempCard.tag} onChange={(e) => setTempCard({ ...tempCard, tag: e.target.value })} />
         <input placeholder="Price" value={tempCard.price} onChange={(e) => setTempCard({ ...tempCard, price: e.target.value })} />
         <button onClick={currentCard ? saveEdit : saveAdd}>Save</button>
+      </Modal>
+
+      
+      <Modal isOpen={isViewModal} onClose={closeView}>
+        <h2>{currentCard?.title}</h2>
+        <img src={currentCard?.image} alt={currentCard?.title} style={{ width: "100%", borderRadius: "8px" }} />
+        <p>{currentCard?.description}</p>
+        <p style={{ fontWeight: "bold" }}>{currentCard?.price}</p>
+        <div style={{ marginTop: "10px" }}>
+          <button
+            style={{ marginRight: "10px", backgroundColor: "#007bff", color: "#fff", borderRadius: "6px", padding: "6px 12px" }}
+            onClick={() => toggleFavorite(currentCard)}
+          >
+            {favorites.some((f) => f.id === currentCard?.id) ? "★ Favorited" : "☆ Like"}
+          </button>
+          <button style={{ backgroundColor: "#ccc", borderRadius: "6px", padding: "6px 12px" }} onClick={closeView}>
+            Cancel
+          </button>
+        </div>
       </Modal>
     </>
   );

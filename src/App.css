@@ -165,3 +165,58 @@ button.open:hover {
   font-size: 20px;
   cursor: pointer;
 }
+
+
+.view-modal {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.view-modal img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.view-modal p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.view-modal .buttons {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.view-modal .buttons button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.view-modal .buttons .like {
+  background-color: #007bff;
+  color: white;
+}
+
+.view-modal .buttons .like:hover {
+  background-color: #0063d1;
+}
+
+.view-modal .buttons .cancel {
+  background-color: #ccc;
+}
+
+.view-modal .buttons .cancel:hover {
+  background-color: #b3b3b3;
+}
